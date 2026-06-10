@@ -1,6 +1,7 @@
 {
-  "name": "Tokyo Terminal",
-  "version": "1.3.2",
+  "name": "tokyo-terminal-obsidian",
+  "description": "Retro futurist 80s terminal, synthwave, Tokyo neons theme",
+  "version": "2.0.0",
   "minAppVersion": "0.16.0",
   "author": "神涅克斯",
   "authorUrl": "https://github.com/TSLST"

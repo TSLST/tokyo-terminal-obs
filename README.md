@@ -1,11 +1,10 @@
 ---
 Type: Doc
 Use: Readme docs for Tokyo Terminal them, Obsidian version.
-Tags: #documentation #theme
+Tags: !!str "#documentation #theme"
 Creation: 2026-01-15
-Update: 2026-06-08
+Update: 2026-06-10
 Contributors: 神縁
-Links: [[theme]]
 ---
 
 # Tokyo Terminal
@@ -81,6 +80,19 @@ For developers/writers nostalgic of the future. For those who code like the futu
 | +oldRed         | `#d66666` |                          |
 | +Pink           | `#F1ADFF` |                          |
 | +Gold           | `#E3E9AE` |                          |
+
+-----------------------------------------
+## ToDo
+-----------------------------------------
+
+- [ ] Publishing Obsidian version
+- [x] Publishing VS Codium version on the marketplace
+- [ ] Find KaTeX devs and ask them to add an align tag resetter
+- [ ] Review port to Firefox
+- [ ] Port to Chrome
+<br><br>
+
+> Do not hesitate to drop me a line on GitHub if you spot an issue, see more tweaks and like the color scheme.
 
 -----------------------------------------
 ## Screenshots
