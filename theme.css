@@ -389,12 +389,12 @@ img {
 
 .tree-item-self.nav-folder-title.is-clickable.mod-collapsible {
   background-color: var(--background-primary-alt);
-  border: 2px solid color-mix(in srgb, var(--background-primary) 60%, transparent);
+  border: 2px solid color-mix(in srgb, var(--background-primary) 50%, transparent);
 }
 
 .tree-item-self.nav-file-title.tappable.is-clickable {
   background-color: var(--background-primary);
-  border: 0.5px solid color-mix(in srgb, var(--hr-color) 13.37%, transparent);
+  border: 0.5px solid color-mix(in srgb, var(--hr-color) 20%, transparent);
 }
 
 .nav-files-container.node-insert-event {
@@ -1016,70 +1016,111 @@ span.cm-hmd-codeblock {
 }
 
 /*=========================*/
-/*= DIAGNOSTIC PATCH - REMOVE AFTER TESTING */
-/*= Add to end of theme. Push to mobile and check what's red. */
-/*= Each block is numbered — report back which numbers are red */
-/*= and which are still cyan. That tells us which selector wins. */
+/*= DIAGNOSTIC ROUND 2 - REMOVE AFTER TESTING                  */
+/*= Block 6 (html body button) confirmed working - keep it     */
+/*= for true <button> elements but scope it later.             */
+/*= This round targets non-<button> cyan survivors with        */
+/*= distinct colors so we can map each to a class.             */
 /*=========================*/
 
-/* [1] Highest specificity catch-all for clickable-icon */
-html body .modal-close-button.mod-raised.clickable-icon,
-html body .modal-close-button.mod-raised.clickable-icon:active,
-html body .modal-close-button.mod-raised.clickable-icon:focus,
-html body .modal-close-button.mod-raised.clickable-icon:hover {
-  background-color: #ff0000 !important;
+/* [A] Modal header buttons: back arrow + close X (top of menu) */
+/*     ORANGE - these are likely .clickable-icon variants */
+html body .modal-close-button,
+html body .modal-close-button *,
+html body .clickable-icon.mod-back,
+html body .modal .clickable-icon,
+html body .modal-header .clickable-icon,
+html body .modal-header .clickable-icon svg {
+  background-color: #ff8800 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* [B] Modal title text - target the title bar specifically */
+/*     LIME GREEN */
+html body .modal-title,
+html body .modal-header,
+html body .modal-header .modal-title {
+  background-color: #00ff00 !important;
+  color: #000000 !important;
+}
+
+/* [C] Settings nav items (General, Editor, Appearance...) */
+/*     PURPLE - confirm these ARE buttons (block 6 should've caught) */
+html body .vertical-tab-nav-item,
+html body .vertical-tab-nav-item.is-active {
+  background-color: #aa00ff !important;
   color: #ffffff !important;
 }
 
-/* [2] Setting item control button */
-html body .setting-item-control button,
-html body .setting-item-control .button,
-html body div.setting-item-control button,
-html body div.setting-item-control button:active,
-html body div.setting-item-control button:focus {
-  background-color: #ff0000 !important;
+/* [D] Ribbon / mod-wheel button (hamburger-like menu trigger) */
+/*     PINK */
+html body .side-dock-ribbon-action,
+html body .side-dock-ribbon-tab,
+html body .workspace-tab-header-inner-icon,
+html body .clickable-icon[aria-label*="menu" i],
+html body .clickable-icon[aria-label*="More" i] {
+  background-color: #ff00aa !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* [E] Vault name dropdown trigger */
+/*     YELLOW */
+html body .workspace-drawer-vault-switcher,
+html body .workspace-drawer-header,
+html body .workspace-drawer-header-name,
+html body .clickable-icon.workspace-drawer-vault-switcher {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+/* [F] Screen selector tabs (Files / Search / Tags) and their dropdowns */
+/*     TEAL-different (distinguish from theme cyan) */
+html body .workspace-drawer-tab-option,
+html body .workspace-drawer-tab-options,
+html body .workspace-tab-header,
+html body .workspace-drawer-active-tab-icon,
+html body .nav-buttons-container .clickable-icon {
+  background-color: #008080 !important;
+  color: #ffff00 !important;
+}
+
+/* [G] Dotted menu (file context menu trigger, top right of file explorer) */
+/*     BROWN */
+html body .view-header-icon,
+html body .view-actions .clickable-icon,
+html body .view-action.clickable-icon {
+  background-color: #663300 !important;
   color: #ffffff !important;
 }
 
-/* [3] Dropdown */
-html body .dropdown,
-html body select.dropdown,
-html body .setting-item-control select,
-html body .setting-item-control select:focus,
-html body .setting-item-control select:active {
-  background-color: #ff0000 !important;
+/* [H] Bottom bar: burger, add tab, search icons */
+/*     MAGENTA */
+html body .mobile-navbar,
+html body .mobile-navbar .clickable-icon,
+html body .mobile-navbar-tab,
+html body .mobile-navbar-tab-icon {
+  background-color: #ff00ff !important;
   color: #ffffff !important;
 }
 
-/* [4] SVG icon inside settings lucide */
-html body .lucide-settings,
-html body svg.svg-icon.lucide-settings,
-html body .clickable-icon svg.lucide-settings {
-  color: #ff0000 !important;
-  fill: #ff0000 !important;
+/* [I] Bottom bar arrows (the gray ones with cyan icon - likely nav history) */
+/*     WHITE bg / BLUE text to distinguish from H */
+html body .clickable-icon[aria-label*="Navigate" i],
+html body .clickable-icon[aria-label*="back" i],
+html body .clickable-icon[aria-label*="forward" i] {
+  background-color: #ffffff !important;
+  color: #0000ff !important;
+  fill: #0000ff !important;
 }
 
-/* [5] mod-mobile scoped — does this selector even fire? */
-.mod-mobile .modal-close-button {
-  background-color: #ff0000 !important;
+/* [J] Links/outgoing-links screen items */
+/*     DARK GREEN bg / WHITE text */
+html body .tree-item-self,
+html body .search-result-file-title,
+html body .nav-file-title,
+html body .nav-folder-title {
+  background-color: #003300 !important;
   color: #ffffff !important;
-}
-
-/* [6] Generic button catch — widest net */
-html body button,
-html body button:active,
-html body button:focus {
-  background-color: #ff0000 !important;
-  color: #ffffff !important;
-}
-
-/* [7] Test: is --text-normal actually the source?
-   Override it to red and see if buttons change without touching background-color */
-.theme-dark {
-  --text-normal: #ff0000;
-}
-
-/* [8] Test: interactive-accent as background source */
-.theme-dark {
-  --interactive-accent: #ff0000;
 }
