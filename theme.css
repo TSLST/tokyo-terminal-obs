@@ -1016,95 +1016,70 @@ span.cm-hmd-codeblock {
 }
 
 /*=========================*/
-/*= MOBILE FIX - Android button cyan background bleed */
-/*= Append this to the end of tokyo-terminal-theme.css */
+/*= DIAGNOSTIC PATCH - REMOVE AFTER TESTING */
+/*= Add to end of theme. Push to mobile and check what's red. */
+/*= Each block is numbered — report back which numbers are red */
+/*= and which are still cyan. That tells us which selector wins. */
 /*=========================*/
 
-/* 1. Kill WebView tap highlight globally — the #34e2e2 was leaking here */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-/* 2. Enforce transparent backgrounds on all clickable icon variants
-      Obsidian mobile adds extra states not triggered on desktop */
-/*
-.clickable-icon,
-.clickable-icon:active,
-.clickable-icon:focus,
-.clickable-icon.is-active,
-.nav-action-button,
-.nav-action-button:active,
-.nav-action-button:focus,
-.view-action,
-.view-action:active,
-.view-action:focus {
-  background-color: transparent !important;
-  -webkit-tap-highlight-color: transparent;
-}
-*/
-/* 3. Dropdown buttons — the wheel/settings icon group */
-.workspace-drawer-vault-actions .clickable-icon,
-.workspace-drawer-vault-actions .clickable-icon:active,
-.workspace-drawer-vault-actions .clickable-icon:focus,
-.workspace-drawer-vault-actions .clickable-icon svg,
-.workspace-drawer-vault-actions .clickable-icon:active svg,
-.workspace-drawer-vault-actions .clickable-icon:focus svg {
-  background-color: transparent !important;
-  color: var(--button-color);
-  -webkit-tap-highlight-color: transparent;
+/* [1] Highest specificity catch-all for clickable-icon */
+html body .modal-close-button.mod-raised.clickable-icon,
+html body .modal-close-button.mod-raised.clickable-icon:active,
+html body .modal-close-button.mod-raised.clickable-icon:focus,
+html body .modal-close-button.mod-raised.clickable-icon:hover {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
 }
 
-/* 4. Nav action buttons (new note, new folder icons) */
-.nav-action-button.is-active,
-.nav-action-button:active,
-.nav-action-button:focus {
-  background-color: transparent !important;
-  color: var(--button-color);
+/* [2] Setting item control button */
+html body .setting-item-control button,
+html body .setting-item-control .button,
+html body div.setting-item-control button,
+html body div.setting-item-control button:active,
+html body div.setting-item-control button:focus {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
 }
 
-/* 5. Mobile-specific: Obsidian wraps some buttons differently on Android.
-      The .mod-mobile class is added to body on mobile builds. */
-.mod-mobile .clickable-icon,
-.mod-mobile .clickable-icon:hover,
-.mod-mobile .clickable-icon:active,
-.mod-mobile .clickable-icon:focus {
-  background-color: transparent !important;
-  -webkit-tap-highlight-color: transparent;
+/* [3] Dropdown */
+html body .dropdown,
+html body select.dropdown,
+html body .setting-item-control select,
+html body .setting-item-control select:focus,
+html body .setting-item-control select:active {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
 }
 
-.mod-mobile .view-actions .clickable-icon,
-.mod-mobile .view-actions .clickable-icon:active {
-  background-color: transparent !important;
-  color: var(--button-color);
+/* [4] SVG icon inside settings lucide */
+html body .lucide-settings,
+html body svg.svg-icon.lucide-settings,
+html body .clickable-icon svg.lucide-settings {
+  color: #ff0000 !important;
+  fill: #ff0000 !important;
 }
 
-/* 6. Dropdown selects — Android renders <select> with system background
-      which can collide with your cyan foreground variable */
-select,
-.dropdown,
-.dropdown:focus,
-.dropdown:active {
-  -webkit-tap-highlight-color: transparent;
-  background-color: var(--interactive-normal);
-  color: var(--button-foreground);
+/* [5] mod-mobile scoped — does this selector even fire? */
+.mod-mobile .modal-close-button {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
 }
 
-/* 7. Sidebar ribbon actions on mobile tap */
-.side-dock-ribbon-action,
-.side-dock-ribbon-action:active,
-.side-dock-ribbon-action:focus,
-.side-dock-ribbon-tab,
-.side-dock-ribbon-tab:active,
-.side-dock-ribbon-tab:focus {
-  background-color: transparent !important;
-  -webkit-tap-highlight-color: transparent;
+/* [6] Generic button catch — widest net */
+html body button,
+html body button:active,
+html body button:focus {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
 }
 
-/* 8. Guard: --background-modifier-border is cyan (#34e2e2) in your theme.
-      Some Obsidian mobile components use it as a background-color fallback.
-      This resets the pattern on interactive elements only. */
-.mod-mobile button,
-.mod-mobile .clickable-icon,
-.mod-mobile [class*="action"] {
-  --background-modifier-hover: #2a2436;
-  -webkit-tap-highlight-color: transparent;
+/* [7] Test: is --text-normal actually the source?
+   Override it to red and see if buttons change without touching background-color */
+.theme-dark {
+  --text-normal: #ff0000;
+}
+
+/* [8] Test: interactive-accent as background source */
+.theme-dark {
+  --interactive-accent: #ff0000;
 }
